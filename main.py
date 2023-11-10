@@ -44,9 +44,6 @@ style = ttk.Style(root)
 style.configure("Treeview", background="lightblue", fieldbackground="lightgray", rowheight=25)
 
 #=========================  INITIALIZE FUNCTIONS =================
-def check_for_updates():
-    api_url = 
-
 def fetch_inventory():
     # Clear Treeview
     inventory_grid.delete(*inventory_grid.get_children())
