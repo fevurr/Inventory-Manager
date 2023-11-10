@@ -1,10 +1,15 @@
+import os
+import sys
+
+import requests
 import tkinter as tk
 from tkinter import ttk
 import tkinter.messagebox as messagebox
-import os
-import sys
 import firebase_admin 
 from firebase_admin import credentials, db
+
+# Application version
+CURRENT_VERSION = "1.0.0"
 
 if getattr(sys, 'frozen', False):
     # The application is frozen 
