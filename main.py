@@ -9,7 +9,7 @@ import firebase_admin
 from firebase_admin import credentials, db
 
 # Application version
-CURRENT_VERSION = "0.2.2"
+CURRENT_VERSION = "0.2.0"
 
 if getattr(sys, 'frozen', False):
     # The application is frozen 
@@ -44,6 +44,8 @@ style = ttk.Style(root)
 style.configure("Treeview", background="lightblue", fieldbackground="lightgray", rowheight=25)
 
 #=========================  INITIALIZE FUNCTIONS =================
+def check_for_updates():
+    api_url = 
 
 def fetch_inventory():
     # Clear Treeview
