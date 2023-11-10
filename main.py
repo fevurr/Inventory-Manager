@@ -9,7 +9,7 @@ import firebase_admin
 from firebase_admin import credentials, db
 
 # Application version
-CURRENT_VERSION = "1.0.0"
+CURRENT_VERSION = "0.2.2"
 
 if getattr(sys, 'frozen', False):
     # The application is frozen 
