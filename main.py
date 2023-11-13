@@ -8,8 +8,11 @@ import tkinter.messagebox as messagebox
 import firebase_admin 
 from firebase_admin import credentials, db
 
+from packaging import version 
+import webbrowser 
+
 # Application version
-CURRENT_VERSION = "0.2.0"
+CURRENT_VERSION = "1.0.0"
 
 if getattr(sys, 'frozen', False):
     # The application is frozen 
@@ -44,6 +47,27 @@ style = ttk.Style(root)
 style.configure("Treeview", background="lightblue", fieldbackground="lightgray", rowheight=25)
 
 #=========================  INITIALIZE FUNCTIONS =================
+def check_for_updates():
+    api_url = "https://api.github.com/repos/fevurr/Inventory-Manager/releases/latest"
+    try:
+        response = requests.get(api_url)
+        response.raise_for_status()
+        latest_release = response.json()
+        latest_version = latest_release['tag name']
+        if version.parse(latest_release) > version.parse(CURRENT_VERSION):
+            return latest_release['html_url']
+    except requests.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")
+    except Exception as err:
+        print(f"An error occurred: {err}")
+    return None
+
+def prompt_for_update():
+    update_url = check_for_updates()
+    if update_url:
+        if messagebox.askyesno("Update Available", "A new version of Inventory Manager is available. Would you like to download it now?"):
+            webbrowser.open(update_url)
+
 def fetch_inventory():
     # Clear Treeview
     inventory_grid.delete(*inventory_grid.get_children())
