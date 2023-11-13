@@ -14,11 +14,9 @@ import webbrowser
 # Application version
 CURRENT_VERSION = "v1.0.0"
 
-if getattr(sys, 'frozen', False):
-    # The application is frozen 
+if getattr(sys, 'frozen', False): 
     cred_path = os.path.join(sys._MEIPASS, 'firebase_keys/inventory-database-c81ac-firebase-adminsdk-7tm75-bb1d275ac8.json')
 else:
-    # The application is not frozen 
     cred_path = 'firebase_keys/inventory-database-c81ac-firebase-adminsdk-7tm75-bb1d275ac8.json'
 
 cred = credentials.Certificate(cred_path)
@@ -68,7 +66,7 @@ def check_for_updates():
         print(f"An error occurred: {err}")
     return None
 
-def prompt_for_update(update_url):  # Add the update_url parameter here
+def prompt_for_update(update_url):
     print("Prompting for update...")
     if messagebox.askyesno("Update Available", "A new version of Inventory Manager is available. Would you like to download it now?"):
         webbrowser.open(update_url)
@@ -258,7 +256,6 @@ def clear_filter():
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred while fetching data: {e}")
 
-# Bind the "Esc" key to a confirm_exit function 
 root.bind("<Escape>", lambda event: confirm_exit())
 
 #==================== GUI INITIALIZATION =============================
@@ -270,27 +267,27 @@ input_frame.grid(row=0, column=0, sticky="nsew")
 # Add input fields/labels  
 item_id_label = ttk.Label(input_frame, text="Item ID:", font=("Sans Serif", 12))
 item_id_label.grid(row=0, column=0, sticky="w")
-item_id_entry = ttk.Entry(input_frame, width=50)  # Set the width to make it longer
+item_id_entry = ttk.Entry(input_frame, width=50)
 item_id_entry.grid(row=0, column=1, sticky="w")
 
 type_label = ttk.Label(input_frame, text="Item Type:", font=("Sans Serif", 12))
 type_label.grid(row=1, column=0, sticky="w")
-type_entry = ttk.Entry(input_frame, width=50)  # Set the width to make it longer
+type_entry = ttk.Entry(input_frame, width=50)
 type_entry.grid(row=1, column=1, sticky="w")
 
 name_label = ttk.Label(input_frame, text="Item Name:", font=("Sans Serif", 12))
 name_label.grid(row=2, column=0, sticky="w")
-name_entry = ttk.Entry(input_frame, width=50)  # Set the width to make it longer
+name_entry = ttk.Entry(input_frame, width=50)
 name_entry.grid(row=2, column=1, sticky="w")
 
 quantity_label = ttk.Label(input_frame, text="Quantity:", font=("Sans Serif", 12))
 quantity_label.grid(row=3, column=0, sticky="w")
-quantity_entry = ttk.Entry(input_frame, width=50)  # Set the width to make it longer
+quantity_entry = ttk.Entry(input_frame, width=50)
 quantity_entry.grid(row=3, column=1, sticky="w")
 
 filter_label = ttk.Label(root, text="Filter:", font=("Sans Serif", 12))
 filter_label.place(relx=0, rely=0.122)
-filter_entry = ttk.Entry(root, width=30) # Set the width to make it longer 
+filter_entry = ttk.Entry(root, width=30)
 filter_entry.place(relx=0.03, rely=0.122)
 
 esc_tip_label = ttk.Label(root, text="Use Esc to exit the application", font=("Sans Serif", 12))
@@ -299,11 +296,9 @@ esc_tip_label.place(relx=0, rely=0.97)
 title_label = ttk.Label(root, text="CRUD Inventory Log", font=("Sans Serif", 20))
 title_label.place(relx=0.5, rely=0.05, anchor="center")
 
-# Scrollbar for Treeview
 scrollbar = ttk.Scrollbar(root, orient="vertical")
 scrollbar.place(relx=0.975, rely=0.2, relheight=0.75)
 
-# Create a Treeview widget for the grid
 inventory_grid = ttk.Treeview(root, columns=("ID", "Type", "Name", "Quantity"), show="headings")
 
 # Define column headings
@@ -328,7 +323,6 @@ button_style.configure("Custom.TButton", font=("Sans Serif", 10), foreground="bl
 # Calculate the x-position for centering
 x_center = (1 - button_width / root.winfo_screenwidth()) / 2  # Centered
 
-# Add buttons
 add_button = ttk.Button(root, text="Add Item", style="Custom.TButton", command=add_item)
 add_button.place(relx=x_center - 0.468, rely=0.165, width=button_width, height=button_height)
 
@@ -350,7 +344,6 @@ update_url = check_for_updates()
 if update_url:
     prompt_for_update(update_url)
 
-# Fetch and populate application 
 fetch_inventory()
 
 # START MAIN LOOP
