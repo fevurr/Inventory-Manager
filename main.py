@@ -53,8 +53,8 @@ def check_for_updates():
         response = requests.get(api_url)
         response.raise_for_status()
         latest_release = response.json()
-        latest_version = latest_release['tag name']
-        if version.parse(latest_release) > version.parse(CURRENT_VERSION):
+        latest_version = latest_release['tag_name']
+        if version.parse(latest_version) > version.parse(CURRENT_VERSION):
             return latest_release['html_url']
     except requests.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
@@ -288,7 +288,7 @@ filter_entry.place(relx=0.03, rely=0.122)
 esc_tip_label = ttk.Label(root, text="Use Esc to exit the application", font=("Sans Serif", 12))
 esc_tip_label.place(relx=0, rely=0.97)
 
-title_label = ttk.Label(root, text="IT Inventory Log", font=("Sans Serif", 20))
+title_label = ttk.Label(root, text="CRUD Inventory Log", font=("Sans Serif", 20))
 title_label.place(relx=0.5, rely=0.05, anchor="center")
 
 # Scrollbar for Treeview
