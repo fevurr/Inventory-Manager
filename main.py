@@ -12,7 +12,7 @@ from packaging import version
 import webbrowser 
 
 # Application version
-CURRENT_VERSION = "1.1.0"
+CURRENT_VERSION = "v1.0.0"
 
 if getattr(sys, 'frozen', False):
     # The application is frozen 
@@ -68,16 +68,13 @@ def check_for_updates():
         print(f"An error occurred: {err}")
     return None
 
-def prompt_for_update():
+def prompt_for_update(update_url):  # Add the update_url parameter here
     print("Prompting for update...")
-    update_url = check_for_updates()
-    if update_url:
-        print("Update URL found, asking user to update.")
-        if messagebox.askyesno("Update Available", "A new version of Inventory Manager is available. Would you like to download it now?"):
-            webbrowser.open(update_url)
-            print("User chose to update. Opening web browser...")
+    if messagebox.askyesno("Update Available", "A new version of Inventory Manager is available. Would you like to download it now?"):
+        webbrowser.open(update_url)
+        print("User chose to update. Opening web browser...")
     else:
-        print("No update is available or there was an error checking for updates.")
+        root.focus_force()
 
 def fetch_inventory():
     # Clear Treeview
@@ -348,6 +345,10 @@ clear_filter_button = ttk.Button(root, text="Clear Filter", style="Custom.TButto
 clear_filter_button.place(relx=0, rely=0.1, height=20)
 
 scrollbar.config(command=inventory_grid.yview)  # Attach scrollbar to the Treeview
+
+update_url = check_for_updates()
+if update_url:
+    prompt_for_update(update_url)
 
 # Fetch and populate application 
 fetch_inventory()
