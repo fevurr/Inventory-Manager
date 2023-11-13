@@ -1,3 +1,3 @@
 # Inventory-Manager
-This is a very simple CRUD style inventory system so my coworkers and I can log our IT assets and keep track of them much better.
-![image](https://github.com/fevurr/Inventory-Manager/assets/110615166/90e5ea43-8b12-457a-a9cc-d08a423901f0)
+This is a very simple CRUD style inventory system so my coworkers and I can log our IT assets and keep track of them much better.  This application utilizes Google Firebase as a database.  In order to use this application as it is you will need to create a database through that and download your firebase adminsdk file and replace the original file in the "firebase_keys" file to link to your database.  After that you will only need to replase the cred path to the old file with your new one.
+![image](https://github.com/fevurr/Inventory-Manager/assets/110615166/52c3ccdf-79e0-4f93-8d44-3945bde8d996)
