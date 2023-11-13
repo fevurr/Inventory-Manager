@@ -12,7 +12,7 @@ from packaging import version
 import webbrowser 
 
 # Application version
-CURRENT_VERSION = "1.0.0"
+CURRENT_VERSION = "1.1.0"
 
 if getattr(sys, 'frozen', False):
     # The application is frozen 
@@ -48,14 +48,20 @@ style.configure("Treeview", background="lightblue", fieldbackground="lightgray",
 
 #=========================  INITIALIZE FUNCTIONS =================
 def check_for_updates():
+    print("Checking for updates...")
     api_url = "https://api.github.com/repos/fevurr/Inventory-Manager/releases/latest"
     try:
         response = requests.get(api_url)
         response.raise_for_status()
         latest_release = response.json()
         latest_version = latest_release['tag_name']
+        print(f"Latest version on GitHub: {latest_version}")
+        print(f"Current version: {CURRENT_VERSION}")
         if version.parse(latest_version) > version.parse(CURRENT_VERSION):
+            print("An update is available.")
             return latest_release['html_url']
+        else:
+            print("Your application is up to date.")
     except requests.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
     except Exception as err:
@@ -63,10 +69,15 @@ def check_for_updates():
     return None
 
 def prompt_for_update():
+    print("Prompting for update...")
     update_url = check_for_updates()
     if update_url:
+        print("Update URL found, asking user to update.")
         if messagebox.askyesno("Update Available", "A new version of Inventory Manager is available. Would you like to download it now?"):
             webbrowser.open(update_url)
+            print("User chose to update. Opening web browser...")
+    else:
+        print("No update is available or there was an error checking for updates.")
 
 def fetch_inventory():
     # Clear Treeview
