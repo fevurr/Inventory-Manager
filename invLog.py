@@ -11,7 +11,7 @@ import webbrowser
 import random
 
 # Application version
-CURRENT_VERSION = "v1.0.0"
+CURRENT_VERSION = "v1.5.0"
 
 if getattr(sys, 'frozen', False): 
     cred_path = os.path.join(sys._MEIPASS, 'firebase_keys/inventory-database-c81ac-firebase-adminsdk-7tm75-bb1d275ac8.json')
