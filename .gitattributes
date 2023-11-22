@@ -1,1 +1,2 @@
 *.psd filter=lfs diff=lfs merge=lfs -text
+ARCHIVED_BUILDS/Inventory-Manager-1.0.0.zip filter=lfs diff=lfs merge=lfs -text
