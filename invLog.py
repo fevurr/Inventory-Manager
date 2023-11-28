@@ -376,7 +376,7 @@ def start_inventory_application():
     esc_tip_label = ttk.Label(root, text="Use Esc to exit the application", font=("Sans Serif", 12))
     esc_tip_label.place(relx=0, rely=0.97)
 
-    title_label = ttk.Label(root, text="CRUD Inventory Log Test Application", font=("Sans Serif", 20))
+    title_label = ttk.Label(root, text="CRUD Inventory Log", font=("Sans Serif", 20))
     title_label.place(relx=0.5, rely=0.05, anchor="center")
 
     scrollbar = ttk.Scrollbar(root, orient="vertical")
