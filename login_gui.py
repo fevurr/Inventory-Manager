@@ -1,9 +1,9 @@
 import requests
 import tkinter as tk 
-from tkinter import messagebox 
+from tkinter import messagebox
+from config import FIREBASE_API_KEY
 
 def attempt_login(username, password, on_success, login_window):
-    FIREBASE_API_KEY = "AIzaSyD7QdmedrR38XAhASseK2PFm-ZNmxXyqt4"  # Your API Key
     url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_API_KEY}"
     headers = {"Content-Type": "application/json"}
     data = {"email": username, "password": password, "returnSecureToken": True}
