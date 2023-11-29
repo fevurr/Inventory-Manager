@@ -68,8 +68,5 @@ node_modules/
 # config file for API keys
 config.py
 
-# personal firebase keys
-inventory-database-c81ac-firebase-adminsdk-7tm75-bb1d275ac8.json
-
-# person database rules
+# Firebase rules
 database.rules.json
