@@ -14,9 +14,9 @@ import random
 CURRENT_VERSION = "v1.5.0"
 
 if getattr(sys, 'frozen', False): 
-    cred_path = os.path.join(sys._MEIPASS, 'firebase_keys/inventory-database-c81ac-firebase-adminsdk-7tm75-bb1d275ac8.json')
+    cred_path = os.path.join(sys._MEIPASS, 'firebase_keys/adminsdk.json')
 else:
-    cred_path = 'firebase_keys/inventory-database-c81ac-firebase-adminsdk-7tm75-bb1d275ac8.json'
+    cred_path = 'firebase_keys/adminsdk.json'
 
 cred = credentials.Certificate(cred_path)
 # Initialize app with service account, granting admin privileges 
