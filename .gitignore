@@ -70,3 +70,15 @@ config.py
 
 # Firebase rules
 database.rules.json
+
+# bfg repository cleaner
+bfg-1.14.0.jar
+
+# Firebase key 
+adminsdk.json
+
+# .firebaserc 
+.firebaserc
+
+# firebase.json 
+firebase.json 
