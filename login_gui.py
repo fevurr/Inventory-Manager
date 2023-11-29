@@ -1,12 +1,19 @@
+import requests
 import tkinter as tk 
 from tkinter import messagebox 
 
 def attempt_login(username, password, on_success, login_window):
-    # Placeholder for authentication logic
-    if username == "admin" and password == "password":  # Replace with actual authentication check
-        login_window.destroy()  # Closes the login window
-        on_success()  # Proceeds to the inventory application
-    else:
+    FIREBASE_API_KEY = "AIzaSyD7QdmedrR38XAhASseK2PFm-ZNmxXyqt4"  # Your API Key
+    url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_API_KEY}"
+    headers = {"Content-Type": "application/json"}
+    data = {"email": username, "password": password, "returnSecureToken": True}
+    
+    response = requests.post(url, headers=headers, json=data)
+    
+    if response.status_code == 200:
+        login_window.destroy()
+        on_success()
+    else: 
         messagebox.showerror("Login failed", "Incorrect credentials")
 
 def on_enter_key(event, email_entry, password_entry, on_success, login_window):
