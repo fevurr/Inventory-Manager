@@ -1,6 +1,0 @@
-{
-  "rules": {
-    ".read": "auth.token.isCliftAutoUser === true",
-    ".write": "auth.token.isCliftAutoUser === true"
-  }
-}
