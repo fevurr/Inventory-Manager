@@ -43,27 +43,35 @@ def check_for_updates():
         response = requests.get(api_url)
         response.raise_for_status()
         latest_release = response.json()
-        latest_version = latest_release['tag_name']
+        latest_version = latest_release.get('tag_name', '0')
+
         print(f"Latest version on GitHub: {latest_version}")
         print(f"Current version: {CURRENT_VERSION}")
-        if version.parse(latest_version) > version.parse(CURRENT_VERSION):
+
+        if latest_version and version.parse(latest_version) > version.parse(CURRENT_VERSION):
             print("An update is available.")
-            return latest_release['html_url']
+            for asset in latest_release.get('assets', []):
+                if asset['name'] == 'InvLog.exe':
+                    download_url = asset['browser_download_url']
+                    print(f"Found update URL: {download_url}")
+                    return download_url
+            print("No valid executable asset found in the release.")
+            return None
         else:
             print("Your application is up to date.")
+            return None
     except requests.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
+        return None
     except Exception as err:
         print(f"An error occurred: {err}")
-    return None
+        return None
 
-def prompt_for_update(update_url):
-    print("Prompting for update...")
-    if messagebox.askyesno("Update Available", "A new version of Inventory Manager is available. Would you like to download it now?"):
-        webbrowser.open(update_url)
-        print("User chose to update. Opening web browser...")
-    else:
-        root.focus_force()
+def prompt_for_update():
+    update_url = check_for_updates()
+    if update_url:
+        # Ensure that we're scheduling this with the Tkinter main loop
+        root.after(100, lambda: messagebox.askyesno("Update Available", "A new version is available. Would you like to download it now?"))
 
 def fetch_inventory():
     # Clear Treeview
@@ -376,7 +384,7 @@ def start_inventory_application():
     esc_tip_label = ttk.Label(root, text="Use Esc to exit the application", font=("Sans Serif", 12))
     esc_tip_label.place(relx=0, rely=0.97)
 
-    title_label = ttk.Label(root, text="CRUD Inventory Log", font=("Sans Serif", 20))
+    title_label = ttk.Label(root, text="CRUD Inventory Application", font=("Sans Serif", 20))
     title_label.place(relx=0.5, rely=0.05, anchor="center")
 
     scrollbar = ttk.Scrollbar(root, orient="vertical")
@@ -429,9 +437,7 @@ def start_inventory_application():
 
     scrollbar.config(command=inventory_grid.yview)
 
-    update_url = check_for_updates()
-    if update_url:
-        prompt_for_update(update_url)
+    root.after(1000, prompt_for_update)
 
     fetch_inventory()
 
